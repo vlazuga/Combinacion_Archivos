@@ -55,12 +55,45 @@ namespace WpfApplication1
         {
             OpenFileDialog findFile1 = new OpenFileDialog();
 
+            findFile1.Filter = "PDF Files (*.pdf)| *.pdf"; //filtrar tipo de archivo (*.pdf)
             if (findFile1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 texboxArchivo1.Text = findFile1.FileName;
                 pathArchivo1 = texboxArchivo1.Text;
                 nombreArchivo1 = System.IO.Path.GetFileName(pathArchivo1);
                 
+            }
+
+        }
+
+        //Para archivo 2
+        private void botonArchivo2_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog findFile2 = new OpenFileDialog();
+
+            findFile2.Filter = "TXT Files (*.docx)| *.txt"; //filtrar tipo de archivo (*.txt)
+            if (findFile2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                texboxArchivo2.Text = findFile2.FileName;
+                pathArchivo2 = texboxArchivo2.Text;
+                nombreArchivo2 = System.IO.Path.GetFileName(pathArchivo2);
+
+            }
+
+        }
+
+        //Para archivo 3
+        private void botonArchivo3_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog findFile3 = new OpenFileDialog();
+
+            findFile3.Filter = "Word Files (*.docx)| *.docx"; //filtrar tipo de archivo (*.docx)
+            if (findFile3.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                texboxArchivo3.Text = findFile3.FileName;
+                pathArchivo3 = texboxArchivo3.Text;
+                nombreArchivo3 = System.IO.Path.GetFileName(pathArchivo3);
+
             }
 
         }
@@ -73,17 +106,36 @@ namespace WpfApplication1
             {
                 texboxDestino1.Text = findFolder1.SelectedPath;
                 pathDestino1 = texboxDestino1.Text + "\\" + nombreArchivo1;
+                pathDestino2 = texboxDestino1.Text + "\\" + nombreArchivo2;
+                pathDestino3 = texboxDestino1.Text + "\\" + nombreArchivo3;
             }
         }
 
          private void botonMover1_Click(object sender, RoutedEventArgs e)
-        { 
+        {
+            
+                 if (texboxArchivo1.Text == "" || texboxArchivo2.Text == "" || texboxArchivo3.Text == "")
+                 {
+                     System.Windows.Forms.MessageBox.Show("Falto seleccionar archivo(s) a mover");
+                 }
+                 else if (texboxDestino1.Text == "")
+                 {
+                     System.Windows.Forms.MessageBox.Show("Falto seleccionar el destino de los archivos a mover");
+                 }
+                 else { 
              //try
                 File.Move(pathArchivo1, pathDestino1);
+                File.Move(pathArchivo2, pathDestino2);
+                File.Move(pathArchivo3, pathDestino3);
 
-                System.Windows.Forms.MessageBox.Show("Se ha movido el archivo de " + pathArchivo1 + " a " + pathDestino1);
+
+                System.Windows.Forms.MessageBox.Show("Se han movido los archivos" + " a " + texboxDestino1.Text);
                 texboxDestino1.Text = "";
                 texboxArchivo1.Text = "";
+                texboxArchivo2.Text = "";
+                texboxArchivo3.Text = "";
+                 }
+
              //catch
              //pruebas con folder en el que no se tenga acceso para moverlo
 
@@ -92,22 +144,9 @@ namespace WpfApplication1
         }
 
 
-    //Para archivo 2
-         private void botonArchivo2_Click(object sender, RoutedEventArgs e)
-         {
-             OpenFileDialog findFile2 = new OpenFileDialog();
+    
 
-             if (findFile2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-             {
-                 texboxArchivo2.Text = findFile2.FileName;
-                 pathArchivo2 = texboxArchivo2.Text;
-                 nombreArchivo2 = System.IO.Path.GetFileName(pathArchivo2);
-
-             }
-
-         }
-
-         private void botonDestino2_Click(object sender, RoutedEventArgs e)
+         /*private void botonDestino2_Click(object sender, RoutedEventArgs e)
          {
              FolderBrowserDialog findFolder2 = new FolderBrowserDialog();
              
@@ -126,43 +165,33 @@ namespace WpfApplication1
              texboxDestino2.Text = "";
              texboxArchivo2.Text = "";
          }
+        */
 
 
+      
 
-      //Para archivo 3
-         private void botonArchivo3_Click(object sender, RoutedEventArgs e)
-         {
-             OpenFileDialog findFile3 = new OpenFileDialog();
+         /*
+          private void botonDestino3_Click(object sender, RoutedEventArgs e)
+          {
+              FolderBrowserDialog findFolder3 = new FolderBrowserDialog();
 
-             if (findFile3.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-             {
-                 texboxArchivo3.Text = findFile3.FileName;
-                 pathArchivo3 = texboxArchivo3.Text;
-                 nombreArchivo3 = System.IO.Path.GetFileName(pathArchivo3);
+              if (findFolder3.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+              {
+                  texboxDestino3.Text = findFolder3.SelectedPath;
+                  pathDestino3 = texboxDestino3.Text + "\\" + nombreArchivo3;
+              }
+          }
 
-             }
 
-         }
+          private void botonMover3_Click(object sender, RoutedEventArgs e)
+          {
+              File.Move(pathArchivo3, pathDestino3);
 
-         private void botonDestino3_Click(object sender, RoutedEventArgs e)
-         {
-             FolderBrowserDialog findFolder3 = new FolderBrowserDialog();
-
-             if (findFolder3.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-             {
-                 texboxDestino3.Text = findFolder3.SelectedPath;
-                 pathDestino3 = texboxDestino3.Text + "\\" + nombreArchivo3;
-             }
-         }
-
-         private void botonMover3_Click(object sender, RoutedEventArgs e)
-         {
-             File.Move(pathArchivo3, pathDestino3);
-
-             System.Windows.Forms.MessageBox.Show("Se ha movido el archivo de " + pathArchivo3 + " a " + pathDestino3);
-             texboxDestino3.Text = "";
-             texboxArchivo3.Text = "";
-         }
+              System.Windows.Forms.MessageBox.Show("Se ha movido el archivo de " + pathArchivo3 + " a " + pathDestino3);
+              texboxDestino3.Text = "";
+              texboxArchivo3.Text = "";
+          }
+           */
 
 
 
